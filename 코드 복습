@@ -1,0 +1,651 @@
+@삼항 연산자- 조건식 ? 참 표현식  : 거짓 표현식
+
+class	Test04 {
+	public static void main(String[] args) {
+		//조건식 ? 참 : 거짓;
+
+		int a = 10;
+
+		System.out.println(a > 0 ? "크다" : "작다"); // a가 0보다 큰지 물어봄. > 크다. 참 표현식을 결과값으로 산출.
+		System.out.println(a > 5 ? "크다" : "작다"); // 크다.
+		System.out.println(a < 3 ? "크다" : "작다"); // 작다.
+		System.out.println(a > 10 ? "10보다 크다" : "10보다 작다"); // a는 10보다 크다 라는 조건을 충족하지 못하니까 >false로 >a는 10보다 작다.
+		System.out.println(a == 10 ? "10과 같다" : "10과 같지않다"); //a가 10과 같은지. 10과 같다
+		
+		int b = 10;
+		int x = b > 0 ? b+10 : b-10; //  b가 10보다 크면 b+10을 해주고 작으면 b-10을 해주셈. -참이면 왼쪽, 거짓이면 오른쪽이 실행됨. b가 0보다 크니까 참 표현식이 실행 
+		System.out.println("x=" + x); // x= 20 출력
+
+		int c =80;
+		String result = (c>60) ? "합격" : "불합격";
+		System.out.println(c+ "점은=" + result+ "입니다"); //60보다 크면 합격 작으면 불합격 ---80점은 합격입니다.
+	}
+}
+
+@DHCP 서버에 ip를 자동으로 할당해줌(기간을 정해주거나 사용범위를 정해서 할당해줌) 우리는 서버로부터 ip를 받아서 사용하는 것임.
+
+@코드 실행 흐름 제어 
+-조건식
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int a = 10;
+
+		if(a > 0){
+		System.out.println("0보다 크다"); //참이므로 실행 하고 내려감 -출력
+		}
+		System.out.println("종료"); //-출력
+	}
+}
+--0보다 크다 종료
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int a = 10;
+
+		if(a < 0){
+			System.out.println("0보다 크다"); 	//false이므로 건너뛰고 다음으로 내려감
+			a = a+10; 	//false니까 이것도 건너뛰고 다음으로 내려감
+		}
+		System.out.println("종료"); //-얘만 출력
+	}
+}
+-----종료
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int a = 10;
+
+		if(a > 0){		//만약 여기서 if조건문의 중괄호가 사라지면 바로 밑에 있는 것만 실행됨 -0보다 크다라는 값만 출력?
+		System.out.println("0보다 크다"); 	//true -실행
+		a = a+10;	 //true-실행 //중괄호가 사라지면 얘는 조건문과 상관없는 실행문이니까 실행이 안됨. 그래서 중괄호 블럭은 무조건 넣어줘야함.
+		}
+		System.out.println("a=" +a);	 //실행됨 a=20 
+		System.out.println("종료"); 	//-출력
+	}
+}
+----a=20 종료
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int score = 85;
+		String str1 = "90점 이상입니다";
+		String str2 = "90점 이하입니다";
+		String gradeA = "학점은 A입니다";
+		String gradeB = "학점은 B입니다";
+
+		if(score > 90){
+		System.out.println(str1 + gradeA); 	//if문이 2개면 별개의 if문이기 때문에 밑에 if문도 조건식을 또 실행해야함/ 조건문이 만약 5줄이면 위에 조건을 만족해도 다음 if문도 다 실행해야함
+		}				//85점이니까 첫번째 if문의 조건을 만족하지 못함 >다음 if문으로 넘어감
+		if(score <=90){			//90점 이하라는 조건을 만족
+		System.out.println(str2 + gradeB);  //if문이 사라진다면 삼항연산자로도 표현 가능 (조건문 ? 참 : 거짓)-- (score<=90 ? "90점 이하입니다" : "학점은 B입니다")
+		
+		}
+	}
+}
+-------90점 이하 입니다 학점은 B입니다
+
+@@if -else문 (if 조건 아니면 else)
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int score = 85;
+		String str1 = "90점 이상 입니다";
+		String str2 = "90점 이하 입니다";
+		String gradeA = "학점은 A 입니다";
+		String gradeB = "학점은 B 입니다";
+
+		if(score > 90){
+		System.out.println(str1 + gradeA); //if조건을 만족하지 못하니까 내려감
+		}
+		else{
+			System.out.println(str2 + gradeB); //조건에 맞으면 true가 나오면 if문이 종료됨, 조건이 false면 밑에를 실행 
+		
+		}
+	}
+} 
+----90점 이하입니다 학점은 B입니다
+
+@//만약 18살 이상이면 "성인입니다"
+  class IfExample01 {
+	public static void main(String[] args) {
+		
+		int age = 20;
+		String ageOver = "성인입니다";
+		String ageUnder = "미성년자입니다";
+
+		if(age >= 18) { // IF- ELSE 문 if조건이 맞으면 출력하고 조건에 맞지 않으면 else조건을 출력 A or B느낌 
+		System.out.println(ageOver);
+		}else{
+			System.out.println(ageUnder); 
+		}
+		System.out.println(); // 18살 이상이면 ageOver을 출력하고 if조건을 만족하지못하면 else로 내려가 결과 산출.
+
+		
+		String output1 = (age >=18) ? ageOver : ageUnder;
+		System.out.println(output1); //변수를 선언한 뒤 조건식을 만족하면 true면 ageOver , false면 ageUnder (삼항연산자로 표현)
+		System.out.println();
+
+		String output2 = (age >=18) ? "당신은 성인입니다." : "당신은 미성년자입니다."; //문자열 결과값 산출
+		System.out.println(output2);
+	}
+}
+----성인입니다 ageOver 당신은 성인입니다 
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int age = 14;
+		System.out.println(age >=18 ? "성인" : "미성년자");
+
+	}
+}
+-------이건 if없이 3항식으로 표현. 조건이 하나니까 >미성년자
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int a = 20;
+
+		if(a < 10+20){
+		System.out.println("20보다 크다");
+		}else{
+			System.out.println("20보다 작다"); //a가 20이니까 if조건식 만족( true)----20보다 크다 출력. 
+		}
+	}
+} 
+
+@@number(int) 변수의 값이 짝수인지 홀수인지 출력하는 if문 작성
+
+class IfExample01 {
+	public static void main(String[] args) {  	//number(int) 변수의 값이 짝수인지 홀수인지 출력하는 if문 작성
+		int number = 21;
+
+			if(number =2n){
+				System.out.println("짝수");
+			}else(number = 2n-1){
+				System.out.println("홀수");
+		}
+	}
+}
+이렇게 하면 안됨 
+사진 찍어놓음 다시 해보셈
+------------------
+class IfExample01 {
+	public static void main(String[] args) {
+		//number(int) 변수의 값이 짝수인지 홀수인지 출력하는 if문 작성
+
+		int number = 21;
+
+			if(number % 2 ==0){ //number을 2로 나눈 나머지가 0과 같은지 ----같으면 짝수임
+				System.out.println("짝수");
+			}else{   //그렇지 않으면 홀수 
+				System.out.println("홀수");
+			}
+			System.out.println(); // 21을 2로 나눈 나머지 0이 아님. 홀수 결과값 산출
+
+
+			if(number % 2 ==1){ //number을 2로 나눈 나머지가 1인지---그렇다면 홀수, 아니면 짝수
+				System.out.println("홀수");
+			}else{
+				System.out.println("짝수");
+			}
+			System.out.println(); //21을 2로 나누면 1이 남음 ----홀수
+
+			boolean result = (number % 2) ==0; //number을 2로 나눈 나머지가 0이면 짝수,아니면 홀수
+			if(result){
+				System.out.println(number + "짝수");
+			}	else{
+					System.out.println(number + "홀수"); //21홀수라는 결과값 산출
+				}
+	}
+}
+
+@@연습문제 나이 미취학 초딩 중딩 고딩 성인 >if문이 5면 하나 처리해도 나머지를 다 처리해야해서 문제가 있음
+그래서 if - else if -else 문을 써야함 - 변수에 나이를 대입 시 각 나이에 맞게 이름 출력
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int age = 19;
+
+			if(age <= 7){ 
+				System.out.println("미취학");
+			}else if(age >= 8 && age <= 13){ 	//AND연산자  age가 8이상 13이하 둘다 참이어야 true산출 근데 19니까 false
+				System.out.println("초등학생");
+			}else if(age>=14 && age<=16){  //19니까 false, 다음으로
+				System.out.println("중학생");
+			}else if(age<=19) { //(age>=17 && age<=19) 근데 여기까지 넘어온거면 이미 위 조건식 안 연산값을 건너뛰고(false) 온거라 왼쪽처럼 안 써도 되고 간결하게.
+            //만약 age가 16이라치면 이미 두번째 else if 문에서 데이터가 처리된거니까 굳이 밑에 연산식을 길게 쓸 필요가 없다.
+				System.out.println("고등학생");
+			}else{
+			System.out.println("성인"); //나머지는 성인
+			}
+	}
+}
+@@if- else if -else문 작성- 변수에 점수를 대입 시 각 점수에 맞게 학점 출력
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int score = 77;
+
+			if( score < 60){ 
+				System.out.println("당신의 점수는"+ score+"점이고"+"학점은 F입니다.");  //false값 아래로
+			}else if( score>=60 &&  score<=69){
+				System.out.println("당신의 점수는" + score+"점이고"+ "학점은 D입니다." ); //false값 아래로
+			}else if( score>=70 &&  score<=79){ 
+				System.out.println("당신의 점수는" + score+"점이고"+ "학점은 C입니다." ); //true값 결과 산출.
+			}else if( score>=80 &&  score<=89) { 
+				System.out.println("당신의 점수는" + score+"점이고"+ "학점은 B입니다." );
+			}else{
+			System.out.println("당신의 점수는" + score+"점이고"+ "학점은 A입니다." );
+			}
+	}
+}
+
+-당신의 점수는  77점이고 학점은 C입니다.
+
+@@if- else if -else문 작성 -변수에 나이를 대입시 각 나이에 맞게 입장료가 출력
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int age = 17; //지역변수 선언
+
+			if(age < 8){ 
+				System.out.println("입장료는 0원입니다."); //false , 아래로
+			}else if(age>=8 && age<=13){
+				System.out.println("입장료는 1000원입니다.");  //false , 아래로
+			}else if(age>=14 && age<=16){ 
+				System.out.println("입장료는 30000원입니다." ); //false , 아래로
+			}else if(age>=17 && age<=19) { 
+				System.out.println("입장료는 5000원입니다." ); //true , 값 산출 -----입장료는 5000원입니다.
+			}else{
+			System.out.println("입장료는 10000원입니다.");
+			}
+	}
+}
+
+
+----charge변수를 추가하여 마지막에 한번에 출력하는 것도 가능 (대신 변수 charge값을  조건마다 할당해줘야함. 아니면 경우의 수가 너무 많아짐. If문은 조건식에 변수를 매치하는것이 아니기 때문)
+
+class IfExample01 {
+	public static void main(String[] args) {
+		
+		int age = 17;
+		int charge;
+
+			if(age < 8){ 
+				charge=0; //if문 안에 변수 저장. 이 변수는 이 중괄호 안에서만 쓰임. 다른곳에서는 못씀.
+				System.out.println("미취학아동입니다.");  //false , 아래로
+			}else if(age<14){
+				charge= 1000;
+				System.out.println("초등학생입니다"); //false , 아래로
+			}else if(age<17){ 
+				charge= 3000;
+				System.out.println("중학생입니다" ); //false , 아래로
+			}else if(age<20) { 
+				charge= 5000;
+				System.out.println("고등학생입니다" ); //true, 값 산출
+			}else{
+				charge= 10000;
+			System.out.println("성인입니다");
+			}
+		System.out.println("입장료는"+charge+"원입니다.");  //조건문 밖에 존재. 산출값 출력
+	}
+}
+-------고등학생입니다. 입장료는5000원입니다.
+
+@@if로 주사위 만들기.
+class IfExample02 {
+	public static void main(String[] args) {
+		
+		int num; 		//num에 아무 값도 없어서 실행 오류남 선언만 하고 초기화를 안해줌  그래서  int num=1; 하면 조건에 해당하는 값만 산출됨
+
+		if(num == 1){
+		System.out.println("1이 나왔습니다.");
+		}else if (num ==2){
+		System.out.println("2가 나왔습니다.");
+		}else if (num ==3){
+		System.out.println("3이 나왔습니다.");
+		}else if (num ==4){
+		System.out.println("4가 나왔습니다.");
+		}else if (num ==5){
+		System.out.println("5가 나왔습니다.");
+		}else{
+		System.out.println("6이 나왔습니다.");
+		}
+	}
+}
+
+@Math.random 메서드 랜덤한 값을 만들어주는 메서드
+주사위 만들기
+
+0.0 <= Math.random() <1.0  (0.999999...까지 나옴)  double 실수형임 0.0 이상 1.0 미만.
+
+0.0 <= Math.random() * 6 <1.0
+0.0 <= Math.random() * 6+1 <6.0
+1.0 <= Math.random() * 6+1 <7.0
+	1,2,3,4,5,6 (1보다 크거나 같고 7보다는 작아야하니까) 또 주사위 값은 소수점 없는 정수니까 int로 형변환 해줘야함
+
+
+class IfExample02 {
+	public static void main(String[] args) {
+		
+		//int num; num에 아무 값도 없어서 실행 오류남
+		
+		int num= (int)(Math.random()*6 )+ 1; //Math.random 랜덤한 값을 만들어주는 메서드, 어디서부터 어디까지 범위를 정해줘야함 >1부터 6사이의 랜덤한 값을 만들어줘야하기에 6을 곱하고 1을 더함 그러면 1.0<=math메서드<7.0  근데 실수라서 에러남 그래서 int로 형변환 해줘야함 . 소수점 버려야하기때문.
+
+		if(num == 1){ //위 매서드 값에서 1을 더하지 않고  6만 곱한 상태에서 이 조건문을 num==0으로 해주면, 0<=메서드<6 , 0부터 시작해도 결과는 같음,대신 0~5로 조건식을 변경
+		 System.out.println("1이 나왔습니다.");
+		}else if (num ==2){
+	   	System.out.println("2가 나왔습니다.");
+		}else if (num ==3){
+		 System.out.println("3이 나왔습니다.");
+		}else if (num ==4){
+	   	System.out.println("4가 나왔습니다.");
+		}else if (num ==5){
+		 System.out.println("5가 나왔습니다.");
+		}else{
+		System.out.println("6이 나왔습니다."); //결과는 1부터 6까지 랜덤하게 나옴.
+		}
+	}
+}
+@@중첩 if문
+class IfExample01 {
+	public static void main(String[] args) {
+
+		int score = 55;
+		String grade = "F";
+
+		if(score >= 90){
+			int x = 10;
+			if(score >= 95){
+				grade = "A+";
+				System.out.println("x = " + x);
+			}else{
+				grade = "A";
+			}
+		}else if(score >= 80){
+			if(score >= 85){
+				grade = "B+";
+			}else{
+				grade = "B";
+			}
+		}else if(score >= 70){
+			if(score >= 75){
+				grade = "C+";
+			}else{
+				grade = "C";
+			}
+		}else if(score >= 60){
+			if(score >= 85){
+				grade = "D+";
+			}else{
+				grade = "D";
+			}
+		}else{
+			
+		}
+		System.out.println("학점은 " + grade + "입니다.");
+	}
+}
+class IfExample03 {
+	public static void main(String[] args) {
+
+		int score= 55;
+		String grade= "E";
+
+		if(score >= 90){
+			if(score >= 95){
+				grade = "A+";
+			}else{
+				grade="A";
+			}
+		
+		}else if(score >= 80){ 
+				if(score >= 85){
+					grade= "B+";
+				}else{
+					grade = "B";
+		
+		}else if(score >= 70){
+				if(score >= 75){
+					grade= "C+";
+				}else{
+					grade = "C";
+		
+		}else if(score >= 60){
+				if(score >= 65){
+					grade= "D+";
+				}else{
+					grade = "D";
+		
+		}else if(score >= 50){
+				if(score >= 55){
+					grade= "E+";
+				}else{
+					grade = "E";
+		
+		}else{
+				grade = "F";
+		}
+	}
+오류 났으니까 알아서 수정해리;;
+
+조건문에서는 시작부터 기본값을 정해주고 시작해야 에러가 안남. 값이 안들어갈 확률이 없도록 해야함...
+int a =10;
+if(a>0)일때 a값을 대입(매칭)해서 보는게 아니라 a는 변수이기 때문에 0보다 작은 경우도 있음.
+그니까 값을 지정해줘야함. >값이 없는 경우가 없도록.>다 값이 정해져있도록 해야함.
+
+class IfExample03 {
+	public static void main(String[] args) {
+
+		int a= 10
+     
+	int b; 	//이렇게 하면 에러남 b의 값을 지정해줘야함. 하지만 조건을 if(true)로 놓으면 컴파일 에러가 안남. 
+	
+		if(a > 0){ //true 라 치면
+			b=10;
+			System.out.println ( a + b); 	// a는 변수니까 이게 산출될수도 있고 아래가 산출될수도 있음, 20
+		}else
+			System.out.println ( a );
+		}
+	System.out.println ( a + b);
+	}
+}
+
+옳게 고친것
+class IfExample03 {
+	public static void main(String[] args) { //메인 메서드 안에서 선언한 변수는 지역변수
+
+		int a= 10;  
+		int b; 
+//이렇게 하면 에러남 b의 값을 지정해줘야함. 하지만 조건을 if(true)로 놓으면 컴파일 에러가 안남.
+	//int b =0; 이라고 설정하던가 
+		if(true){
+			b=10;
+			System.out.println ( a + b); //20
+		}else{
+			b= 0;
+			System.out.println ( a ); //10
+		}
+	System.out.println ( a + b); //20
+	}
+}
+변수가 어디 선언되었는지 보고 사용할 수 있음.
+if문 안에 선언되었다면 그 블록을 넘어가면 사용할 수 없음.
+
+@스위치제어문
+
+class SwitchExample01 
+{
+	public static void main(String[] args) 
+	{
+		int a =10;
+
+		switch(a){
+			case 10: //case; 10 case 11; 이렇게 선언도 가능 값이 10이거나 11이면 10점입니다 산출.
+				System.out.println("10점입니다.");
+				break; 	
+//여기까지만 출력하고 종료하고 싶다. 코드블럭을 따로 안하고 있으니까 break로 멈춰줘야함. 상황에 따라 쓸 수도 있고 안 쓸수도 있음
+			case 20:
+				System.out.println("20점입니다.");
+			case 30:
+				System.out.println("30점입니다.");
+			case 40:
+				System.out.println("40점입니다.");
+			default:
+				System.out.println("0점입니다.");
+		}
+	}
+}
+
+class SwitchExample01 
+{
+	public static void main(String[] args) 
+	{
+		char grade ='A';
+
+		switch(grade){
+			case 'A':
+			case 'a':
+				System.out.println("최우수 회원입니다.");  //--출력하고 종료
+				break;
+			case 'B':
+			case 'b':
+				System.out.println("우수 회원입니다.");
+				break;
+			case 'C':
+			case 'c':
+				System.out.println("일반 회원입니다.");
+				break;
+			default:
+				System.out.println("비회원입니다.");
+		}
+	}
+}
+
+@@스위치 연습코딩
+class SwitchExample01 
+{
+	public static void main(String[] args) {
+		//직급별 월급을 출력한다
+
+		String position ="대리";
+
+		switch(position){
+			case "부장":
+				System.out.println("월급 800만원");
+				break;
+			case "과장":
+				System.out.println("월급 600만원");
+				break;
+			case "대리":
+				System.out.println("월급 400만원"); //---출력 종료
+				break;
+			default:
+				System.out.println("월급 300만원");
+		}
+	}
+} 
+-월급 400만원
+
+@@스위치로 주사위 만들기
+
+class SwitchExample01 
+{
+	public static void main(String[] args) {
+
+		int num = (int)(Math.random()*6)+1;
+
+
+		switch(num){
+			case 1:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break;
+			case 2:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break;
+			case 3:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break;
+			case 4:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break;
+			case 5:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break;
+			case 6:
+				System.out.println("주사위를 굴려"+ num +"가(이) 나왔습니다.");
+				break; //default 값은 필요 없음 경우의 수가 6개니까.
+		}
+	}
+} 
+
+@@점수에 따라 다른 메세지를 출력하는 프로그램 코드
+class SwitchExample01 
+{
+	public static void main(String[] args) {
+ //점수에 따라 다른 메시지를 출력하는 프로그램 점수를 10으로 나눠라..
+
+		int score = 88;
+
+
+		switch(score/10){ 	 //점수에 10을 나누면 그 숫자로 학점의 범위가 정해짐 80점대 B , 70점대 C ...
+			case 10:		//100점을 10으로 나누면 case 10 -100점인 경우도 있으니까
+			case 9: 
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 A입니다."); //90~100에 해당하면 A
+				break;
+			case 8:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 B입니다."); //값 해당. 결과 출력
+				break;
+			case 7:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 C입니다.");
+				break;
+			case 6:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 D입니다.");
+				break;
+			default:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 E입니다.");
+
+		}
+	}
+} 
+
+근데 switch 제어문은` 경우의 수가 적으니까 if제어문을 더 많이 씀. 경우의 수가 많아서.
+
+@@매스메서드를 이용한 랜덤 학점
+class SwitchExample01 
+{
+	public static void main(String[] args) {
+ 
+
+		int score = (int)(Math.random()*101); //math메서드는 원래 double인데 소수점을 버려야 하니까 int로 
+		//그니까  메서드에 101을 곱하면 0<= math메서드 <101니까 0점부터 100점까지 랜덤하게 나옴. 인트로 안바꿔주면 더블이라서 100.999까지 나오는데 인트로 바꿔주면 소수점을 버리니까 100점까지로 가능해짐.
+
+
+		switch(score/10){ 
+			case 10: //100점을 10으로 나누면 case 10 -100점인 경우도 있으니까
+			case 9:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 A입니다.");
+				break;
+			case 8:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 B입니다.");
+				break;
+			case 7:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 C입니다.");
+				break;
+			case 6:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 D입니다.");
+				break;
+			default:
+				System.out.println("당신의 점수는"+ score +"점이고" +"학점은 E입니다.");
+
+		}
+	}
+}  //결과 값은  랜덤하게 출력됨
